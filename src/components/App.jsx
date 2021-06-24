@@ -22,6 +22,15 @@ function App() {
     });
   }
 
+  function saveEditedNote(title, content, index) {
+    setNotes((prevNotes) => {
+      const nextNotes = [...prevNotes]; // spread inside brackets creates new array
+      nextNotes[index].title = title;
+      nextNotes[index].content = content;
+      return nextNotes;
+    });
+  }
+
   return (
     <div>
       <Header />
@@ -34,6 +43,9 @@ function App() {
             title={noteItem.title}
             content={noteItem.content}
             onDelete={deleteNote}
+            onSave={(newTitle, newContent) =>
+              saveEditedNote(newTitle, newContent, index)
+            }
           />
         );
       })}
